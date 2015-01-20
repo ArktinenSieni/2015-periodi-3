@@ -6,9 +6,17 @@
 package thechase.logiikka.asiat;
 
 /**
- *
+ * Pohjustaa jokaiselle asialle, esteelle, hahmolle sijainnin.
  * @author TheArctic
+ * 
  */
 public interface Asia {
-    
+    /**
+     * Palauttaa sijainnin. X:llä 0 on vasen- ja maksimi oikealaita.
+     * Y:llä 0 on ylä- ja maksimi on alalaita. 
+     * @return Palauttaa sijainnin. Paikalla 0 on x-, ja 1 y-parametri.
+     * 
+     */
+    public int[] sijainti();
+    public boolean ylitettava();
 }
