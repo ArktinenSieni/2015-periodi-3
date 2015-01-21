@@ -6,7 +6,8 @@
 package thechase.logiikka;
 
 /**
- *
+ * Rajapinta kaikille päivitettäville olioille. Helpottaa päivittämistä, kun voi
+ * laittaa kaikki samaan listaan.
  * @author TheArctic
  */
 public interface Paivitettava {

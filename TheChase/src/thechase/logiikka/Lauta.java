@@ -6,6 +6,7 @@
 package thechase.logiikka;
 
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 import thechase.logiikka.asiat.Asia;
 
 /**
@@ -17,6 +18,7 @@ import thechase.logiikka.asiat.Asia;
 public class Lauta implements Paivitettava{
     private Asia[][] kartta;
     private ArrayList<Asia> objektit;
+    private PriorityQueue<int[]> vanhats;
     
     /**
      * 
@@ -27,8 +29,20 @@ public class Lauta implements Paivitettava{
         kartta = new Asia[korkeus][leveys];
     }
     
+    /**
+     * Voidaan asettaa uusi, valmis kartta.
+     * @param uusi 
+     */
+    public void setKartta(Asia[][] uusi) {
+        this.kartta = uusi;
+    }
+    /**
+     * Lisää liikkuvan/muuttuvan objektin.
+     * @param obj Joko Hahmo tai Asia
+     */
     public void lisaaObjekti(Asia obj) {
         objektit.add(obj);
+        vanhats.add(obj.sijainti());
     }
 
     public Asia[][] getKartta() {
@@ -41,7 +55,14 @@ public class Lauta implements Paivitettava{
 
     @Override
     public void paivita() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        for (int i = 0; i < objektit.size(); i++) {
+            int[] sij = vanhats.poll();
+            kartta[sij[0]][sij[1]] = null;
+            
+            int uusi[] = objektit.get(i).sijainti();
+            kartta[uusi[0]][uusi[1]] = objektit.get(i);
+            vanhats.add(uusi);
+        }
     }
     
     

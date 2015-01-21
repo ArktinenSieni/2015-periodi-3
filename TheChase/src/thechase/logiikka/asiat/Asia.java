@@ -18,5 +18,9 @@ public interface Asia {
      * 
      */
     public int[] sijainti();
+    /**
+     * Kertoo voiko Asian yli kulkea.
+     * @return Onko ylitettävä vai ei?
+     */
     public boolean ylitettava();
 }
