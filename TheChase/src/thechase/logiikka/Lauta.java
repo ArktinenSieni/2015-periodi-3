@@ -19,6 +19,7 @@ public class Lauta implements Paivitettava{
     private Asia[][] kartta;
     private ArrayList<Asia> objektit;
     private PriorityQueue<int[]> vanhats;
+    private KarttaGeneroija gene;
     
     /**
      * 
@@ -26,7 +27,11 @@ public class Lauta implements Paivitettava{
      * @param leveys kartan leveys.
      */
     public Lauta(int korkeus, int leveys) {
+        gene = new KarttaGeneroija();
         kartta = new Asia[korkeus][leveys];
+        setKartta(gene.generoiTemplate(kartta));
+        objektit = new ArrayList<Asia>();
+        vanhats = new PriorityQueue<int[]>();
     }
     
     /**
@@ -43,6 +48,7 @@ public class Lauta implements Paivitettava{
     public void lisaaObjekti(Asia obj) {
         objektit.add(obj);
         vanhats.add(obj.sijainti());
+        this.paivita();
     }
 
     public Asia[][] getKartta() {

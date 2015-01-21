@@ -34,10 +34,10 @@ public class Hahmo implements Asia {
         this.objektit = lauta.getObjektit();
         this.maxX = kartta.length - 1;
         this.maxY = kartta[0].length - 1;
-        lauta.lisaaObjekti(this);
-
         this.x = maxX / 2;
         this.y = maxY / 2;
+        lauta.lisaaObjekti(this);
+
     }
 
     /**
@@ -63,7 +63,7 @@ public class Hahmo implements Asia {
      * @return onnustuiko siirtyminen.
      */
     public boolean ylos() {
-        if (this.y > 0) {
+        if (this.y > 0 && kartta[x][y - 1].ylitettava()) {
             setSijainti(x, y - 1);
             return true;
         } else {
@@ -77,7 +77,7 @@ public class Hahmo implements Asia {
      * @return onnustuiko siirtyminen.
      */
     public boolean alas() {
-        if (this.y < this.maxY) {
+        if (this.y < this.maxY && kartta[x][y + 1].ylitettava()) {
             setSijainti(x, y + 1);
             return true;
         } else {
@@ -91,7 +91,7 @@ public class Hahmo implements Asia {
      * @return onnustuiko siirtyminen.
      */
     public boolean vasemmalle() {
-        if (this.x > 0) {
+        if (this.x > 0 && kartta[x - 1][y].ylitettava()) {
             setSijainti(x - 1, y);
             return true;
         } else {
@@ -105,7 +105,7 @@ public class Hahmo implements Asia {
      * @return onnustuiko siirtyminen.
      */
     public boolean oikealle() {
-        if (this.x < this.maxX) {
+        if (this.x < this.maxX && kartta[x + 1][y].ylitettava()) {
             setSijainti(x + 1, y);
             return true;
         } else {
@@ -126,6 +126,11 @@ public class Hahmo implements Asia {
     @Override
     public boolean ylitettava() {
         return true;
+    }
+
+    @Override
+    public String nimi() {
+        return "hahmo";
     }
 
 }

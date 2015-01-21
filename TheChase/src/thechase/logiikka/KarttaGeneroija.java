@@ -19,24 +19,16 @@ public class KarttaGeneroija {
     }
     
     public Asia[][] generoiTemplate(Asia[][] kartta) {
-        int i = 0;
-        int j = 0;
-        while (i < kartta.length) {
-            kartta[i][j] = new Seina(i, j);
-            i++;
+        for (int i = 0; i < kartta.length; i++) {
+            kartta[i][0] = new Seina(i, 0);
+            kartta[i][kartta[0].length - 1] = new Seina(i, kartta[0].length - 1);
         }
-        while (j < kartta[i].length) {
-            kartta[i][j] = new Seina(i, j);
-            j++;
+        
+        for (int i = 0; i < kartta[0].length; i++) {
+            kartta[0][i] = new Seina(0, i);
+            kartta[kartta.length - 1][i] = new Seina(kartta.length - 1, i);
         }
-        while (i >= 0) {
-            kartta[i][j] = new Seina(i, j);
-            i--;
-        }
-        while (j >= 0) {
-            kartta[i][j] = new Seina(i, j);
-            j--;
-        }
+        
         return kartta;
     }
 }

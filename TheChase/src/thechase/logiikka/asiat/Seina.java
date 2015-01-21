@@ -10,8 +10,8 @@ package thechase.logiikka.asiat;
  * @author TheArctic
  */
 public class Seina implements Asia {
-    private int x;
-    private int y;
+    private final int x;
+    private final int y;
     
     public Seina(int x, int y) {
         this.x = x;
@@ -30,6 +30,11 @@ public class Seina implements Asia {
     @Override
     public boolean ylitettava() {
         return false;
+    }
+
+    @Override
+    public String nimi() {
+        return "seina";
     }
     
 }

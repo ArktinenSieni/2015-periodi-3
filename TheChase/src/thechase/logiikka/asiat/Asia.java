@@ -23,4 +23,6 @@ public interface Asia {
      * @return Onko ylitettävä vai ei?
      */
     public boolean ylitettava();
+    
+    public String nimi();
 }
