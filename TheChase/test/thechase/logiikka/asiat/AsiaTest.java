@@ -74,6 +74,8 @@ public class AsiaTest {
         public boolean ylitettava() {
             return false;
         }
+
+        
     }
     
 }

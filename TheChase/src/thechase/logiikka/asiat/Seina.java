@@ -33,8 +33,8 @@ public class Seina implements Asia {
     }
 
     @Override
-    public String nimi() {
-        return "seina";
+    public String toString() {
+        return "#";
     }
     
 }

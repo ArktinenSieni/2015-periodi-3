@@ -24,5 +24,4 @@ public interface Asia {
      */
     public boolean ylitettava();
     
-    public String nimi();
 }

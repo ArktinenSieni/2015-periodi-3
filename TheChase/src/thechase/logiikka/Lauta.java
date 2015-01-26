@@ -5,6 +5,7 @@
  */
 package thechase.logiikka;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 import thechase.logiikka.asiat.Asia;
@@ -18,7 +19,7 @@ import thechase.logiikka.asiat.Asia;
 public class Lauta implements Paivitettava{
     private Asia[][] kartta;
     private ArrayList<Asia> objektit;
-    private PriorityQueue<int[]> vanhats;
+    private ArrayDeque<int[]> vanhats;
     private KarttaGeneroija gene;
     
     /**
@@ -31,7 +32,7 @@ public class Lauta implements Paivitettava{
         kartta = new Asia[korkeus][leveys];
         setKartta(gene.generoiTemplate(kartta));
         objektit = new ArrayList<Asia>();
-        vanhats = new PriorityQueue<int[]>();
+        vanhats = new ArrayDeque<int[]>();
     }
     
     /**
@@ -68,6 +69,16 @@ public class Lauta implements Paivitettava{
             int uusi[] = objektit.get(i).sijainti();
             kartta[uusi[0]][uusi[1]] = objektit.get(i);
             vanhats.add(uusi);
+        }
+        while (!vanhats.isEmpty()) {
+            int[] sij = vanhats.poll();
+            kartta[sij[0]][sij[1]] = null;
+        }
+        
+        for (Asia a : objektit) {
+            int[] sijainti = a.sijainti();
+            vanhats.add(sijainti);
+            kartta[sijainti[0]][sijainti[1]] = a;
         }
     }
     

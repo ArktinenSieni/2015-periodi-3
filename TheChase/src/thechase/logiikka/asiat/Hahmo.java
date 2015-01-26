@@ -25,7 +25,7 @@ public class Hahmo implements Asia {
     private int maxY;
 
     /**
-     * Luo <Code>Hahmo</Code>n.
+     * Luo Hahmon.
      *
      * @param lauta Lauta jolle Hahmo luodaan.
      */
@@ -41,18 +41,19 @@ public class Hahmo implements Asia {
     }
 
     /**
-     * Asettaa <code>Hahmo</code>n sijainnin.
+     * Asettaa Hahmon sijainnin.
      *
      * @param x
      * @param y
      */
     public boolean setSijainti(int x, int y) {
-        if ((x < maxX && x >= 0) && (y < maxY && y >= 0)) {
+        if ((x < maxX && x > 0) && (y < maxY && y > 0)) {
             this.x = x;
             this.y = y;
+            System.out.println("uusi x: " + x + " y: " + y);
             return true;
         } else {
-            System.out.println("Virheelliset parametrit");
+            System.out.println("Virheelliset parametrit" + x + " " + y);
             return false;
         }
 
@@ -129,8 +130,8 @@ public class Hahmo implements Asia {
     }
 
     @Override
-    public String nimi() {
-        return "hahmo";
+    public String toString() {
+        return "H";
     }
 
 }

@@ -9,25 +9,31 @@ import thechase.logiikka.Lauta;
 import thechase.logiikka.Paivitettava;
 
 /**
- *
+ * Laudan piirtäminen tekstikäyttöliittymällä.
  * @author TheArctic
  */
 public class TekstiUI implements Paivitettava{
     Lauta juma;
     
+    /**
+     * Such pun.
+     * @param lauta piirrettävä lauta.
+     */
     public TekstiUI(Lauta lauta) {
         this.juma = lauta;
     }
     
+    /**
+     * Piirtää/kirjoittaa laudan.
+     * 
+     */
     public void piirra() {
         for (int i = 0; i < juma.getKartta().length; i++) {
             for (int j = 0; j < juma.getKartta()[i].length; j++) {
                 if (juma.getKartta()[i][j] == null) {
                     System.out.print(".");
-                } else if (juma.getKartta()[i][j].nimi().equals("hahmo")) {
-                    System.out.print("S");
-                } else if (juma.getKartta()[i][j].nimi().equals("seina")) {
-                    System.out.print("#");
+                } else {
+                    System.out.print(juma.getKartta()[i][j].toString());
                 }
             }
             System.out.println("");
@@ -36,7 +42,7 @@ public class TekstiUI implements Paivitettava{
 
     @Override
     public void paivita() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        piirra();
     }
     
 }
