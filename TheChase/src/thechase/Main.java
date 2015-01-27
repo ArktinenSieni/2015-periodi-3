@@ -18,6 +18,8 @@ public class Main {
         // TODO code application logic here
         Thechase testi = new Thechase();
         testi.kaynnista();
+        
+        
     }
     
 }

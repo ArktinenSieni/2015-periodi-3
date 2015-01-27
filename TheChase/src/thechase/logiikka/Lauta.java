@@ -27,7 +27,7 @@ public class Lauta implements Paivitettava{
      * @param korkeus kartan korkeus.
      * @param leveys kartan leveys.
      */
-    public Lauta(int korkeus, int leveys) {
+    public Lauta(int leveys, int korkeus) {
         gene = new KarttaGeneroija();
         kartta = new Asia[korkeus][leveys];
         setKartta(gene.generoiTemplate(kartta));
@@ -80,6 +80,11 @@ public class Lauta implements Paivitettava{
             vanhats.add(sijainti);
             kartta[sijainti[0]][sijainti[1]] = a;
         }
+    }
+
+    @Override
+    public Paivitettava getPaivitettava() {
+        return this;
     }
     
     

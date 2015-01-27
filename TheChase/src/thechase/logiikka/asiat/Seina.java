@@ -5,6 +5,8 @@
  */
 package thechase.logiikka.asiat;
 
+import java.awt.Color;
+
 /**
  * 
  * @author TheArctic
@@ -35,6 +37,11 @@ public class Seina implements Asia {
     @Override
     public String toString() {
         return "#";
+    }
+
+    @Override
+    public Color GetVari() {
+        return Color.LIGHT_GRAY;
     }
     
 }

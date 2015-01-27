@@ -5,6 +5,7 @@
  */
 package thechase.logiikka.asiat;
 
+import java.awt.Color;
 import thechase.logiikka.Lauta;
 
 /**
@@ -50,6 +51,11 @@ public class Palkinto implements Asia{
     @Override
     public String toString() {
         return "P";
+    }
+
+    @Override
+    public Color GetVari() {
+        return Color.YELLOW;
     }
     
 }

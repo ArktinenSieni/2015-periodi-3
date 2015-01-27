@@ -5,6 +5,7 @@
  */
 package thechase.logiikka.asiat;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import thechase.logiikka.Lauta;
 
@@ -23,6 +24,7 @@ public class Hahmo implements Asia {
     private Asia[][] kartta;
     private int maxX;
     private int maxY;
+    private boolean pahis;
 
     /**
      * Luo Hahmon.
@@ -37,6 +39,7 @@ public class Hahmo implements Asia {
         this.x = maxX / 2;
         this.y = maxY / 2;
         lauta.lisaaObjekti(this);
+        pahis = false;
 
     }
 
@@ -50,7 +53,6 @@ public class Hahmo implements Asia {
         if ((x < maxX && x > 0) && (y < maxY && y > 0)) {
             this.x = x;
             this.y = y;
-            System.out.println("uusi x: " + x + " y: " + y);
             return true;
         } else {
             System.out.println("Virheelliset parametrit" + x + " " + y);
@@ -58,7 +60,18 @@ public class Hahmo implements Asia {
         }
 
     }
+    
+    public void setPahis() {
+        if (this.pahis) {
+            pahis = false;
+        } else {
+            pahis = true;
+        }
+    }
 
+    public boolean getPahis() {
+        return pahis;
+    }
     /**
      * Liikuttaa <Code>Hahmo</Code>a ylös.
      * @return onnustuiko siirtyminen.
@@ -131,7 +144,18 @@ public class Hahmo implements Asia {
 
     @Override
     public String toString() {
+        if(pahis) {
+            return "M";
+        } 
         return "H";
+    }
+
+    @Override
+    public Color GetVari() {
+        if (pahis) {
+            return Color.RED;
+        }
+        return Color.BLUE;
     }
 
 }

@@ -12,4 +12,5 @@ package thechase.logiikka;
  */
 public interface Paivitettava {
     public void paivita();
+    public Paivitettava getPaivitettava();
 }

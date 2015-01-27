@@ -44,5 +44,10 @@ public class TekstiUI implements Paivitettava{
     public void paivita() {
         piirra();
     }
+
+    @Override
+    public Paivitettava getPaivitettava() {
+        return this;
+    }
     
 }

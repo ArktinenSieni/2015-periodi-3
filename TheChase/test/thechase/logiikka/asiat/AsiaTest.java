@@ -5,6 +5,7 @@
  */
 package thechase.logiikka.asiat;
 
+import java.awt.Color;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -73,6 +74,11 @@ public class AsiaTest {
 
         public boolean ylitettava() {
             return false;
+        }
+
+        @Override
+        public Color GetVari() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
         

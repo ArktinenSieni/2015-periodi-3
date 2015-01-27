@@ -5,6 +5,8 @@
  */
 package thechase.logiikka.asiat;
 
+import java.awt.Color;
+
 /**
  * Pohjustaa jokaiselle asialle, esteelle, hahmolle sijainnin.
  * @author TheArctic
@@ -24,4 +26,5 @@ public interface Asia {
      */
     public boolean ylitettava();
     
+    public Color GetVari();
 }
