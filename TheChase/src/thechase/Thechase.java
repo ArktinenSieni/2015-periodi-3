@@ -51,12 +51,18 @@ public class Thechase {
         this.GUITesti = new GUI(lauta);
     }
     
+    /**
+     * Käynnistää ohjelman.
+     */
     public void kaynnista() {
         hirvio.setPahis();
         GUITesti.run();
         
     }
     
+    /**
+     * Tarkastaa pelin jatkumisen ehdot.
+     */
     public void gameOver() {
         // Sankarin Sijainti
         int[] SS = sankari.sijainti();
@@ -75,6 +81,9 @@ public class Thechase {
         
     }
     
+    /**
+     * Huolehtii pelin tapahtumien toteuttamisesta oikeassa järjestyksessä.
+     */
     private void peliLooppi() {
         
         while(!gameOver) {

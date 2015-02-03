@@ -30,6 +30,10 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
         piirra(graphics);
     }
     
+    /**
+     * Piirtää kaikki Asia-oliot.
+     * @param graphics 
+     */
     public void piirra(Graphics graphics) {
         for (int i = 0; i < lauta.getKartta().length; i++) {
             for (int j = 0; j < lauta.getKartta()[i].length; j++) {

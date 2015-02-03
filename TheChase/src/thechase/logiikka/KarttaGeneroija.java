@@ -9,7 +9,7 @@ import thechase.logiikka.asiat.Asia;
 import thechase.logiikka.asiat.Seina;
 
 /**
- *
+ * Sisältää kartan generointimetodit.
  * @author TheArctic
  */
 public class KarttaGeneroija {
@@ -17,7 +17,11 @@ public class KarttaGeneroija {
     public KarttaGeneroija() {
         
     }
-    
+    /**
+     * Piirtää ulkoseinät
+     * @param kartta johon seinät lisätään
+     * @return generoitu kartta
+     */
     public Asia[][] generoiTemplate(Asia[][] kartta) {
         for (int i = 0; i < kartta.length; i++) {
             kartta[i][0] = new Seina(i, 0);
@@ -31,4 +35,5 @@ public class KarttaGeneroija {
         
         return kartta;
     }
+    
 }

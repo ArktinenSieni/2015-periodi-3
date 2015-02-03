@@ -10,8 +10,7 @@ import java.util.ArrayList;
 import thechase.logiikka.Lauta;
 
 /**
- * Sankari ja hirviö perivät tämän luokan omaten sijainnin palauttamisen ja
- * perusliikkumismetodit.
+ * Tästä luokasta tehdään hirviö- ja sankari-oiot.
  *
  * @author TheArctic
  *
@@ -73,11 +72,11 @@ public class Hahmo implements Asia {
         return pahis;
     }
     /**
-     * Liikuttaa <Code>Hahmo</Code>a ylös.
+     * Liikuttaa Hahmoa ylös.
      * @return onnustuiko siirtyminen.
      */
     public boolean ylos() {
-        if (this.y > 0 && kartta[x][y - 1].ylitettava()) {
+        if (this.y > 0 && (kartta[x][y - 1] == null || kartta[x][y - 1].ylitettava())) {
             setSijainti(x, y - 1);
             return true;
         } else {
@@ -87,11 +86,11 @@ public class Hahmo implements Asia {
     }
 
     /**
-     * Liikuttaa <Code>Hahmo</Code>a alas.
+     * Liikuttaa Hahmoa alas.
      * @return onnustuiko siirtyminen.
      */
     public boolean alas() {
-        if (this.y < this.maxY && kartta[x][y + 1].ylitettava()) {
+        if (this.y < this.maxY && (kartta[x][y + 1] == null || kartta[x][y + 1].ylitettava())) {
             setSijainti(x, y + 1);
             return true;
         } else {
@@ -101,11 +100,11 @@ public class Hahmo implements Asia {
     }
 
     /**
-     * Liikuttaa <Code>Hahmo</Code>a vasemmalle.
+     * Liikuttaa Hahmoa vasemmalle.
      * @return onnustuiko siirtyminen.
      */
     public boolean vasemmalle() {
-        if (this.x > 0 && kartta[x - 1][y].ylitettava()) {
+        if (this.x > 0 && (kartta[x - 1][y] == null || kartta[x - 1][y].ylitettava())) {
             setSijainti(x - 1, y);
             return true;
         } else {
@@ -115,11 +114,11 @@ public class Hahmo implements Asia {
     }
 
     /**
-     * Liikuttaa <Code>Hahmo</Code>a oikealle.
+     * Liikuttaa Hahmoa oikealle.
      * @return onnustuiko siirtyminen.
      */
     public boolean oikealle() {
-        if (this.x < this.maxX && kartta[x + 1][y].ylitettava()) {
+        if (this.x < this.maxX && (kartta[x + 1][y] == null || kartta[x + 1][y].ylitettava())) {
             setSijainti(x + 1, y);
             return true;
         } else {
@@ -157,5 +156,37 @@ public class Hahmo implements Asia {
         }
         return Color.BLUE;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 89 * hash + this.x;
+        hash = 89 * hash + this.y;
+        hash = 89 * hash + (this.pahis ? 1 : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Hahmo other = (Hahmo) obj;
+        if (this.x != other.x) {
+            return false;
+        }
+        if (this.y != other.y) {
+            return false;
+        }
+        if (this.pahis != other.pahis) {
+            return false;
+        }
+        return true;
+    }
+
+    
 
 }

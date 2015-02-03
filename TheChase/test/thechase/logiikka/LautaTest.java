@@ -13,14 +13,17 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import thechase.logiikka.asiat.Asia;
+import thechase.logiikka.asiat.Hahmo;
 
 /**
  *
  * @author TheArctic
  */
 public class LautaTest {
+    Lauta testiLauta;
     
     public LautaTest() {
+        this.testiLauta = new Lauta(30, 20);
     }
     
     @BeforeClass
@@ -33,10 +36,35 @@ public class LautaTest {
     
     @Before
     public void setUp() {
+        testiLauta = new Lauta(30, 20);
     }
     
     @After
     public void tearDown() {
+    }
+
+    @Test
+    public void testKartanLuontiReunat() {
+        for (int i = 0; i < testiLauta.getKartta().length; i++) {
+            assertFalse(testiLauta.getKartta()[i][0] == null 
+                    && testiLauta.getKartta()[i][testiLauta.getKartta()[i].length - 1] == null);
+        }
+        for (int i = 0; i < testiLauta.getKartta()[0].length; i++) {
+            assertFalse(testiLauta.getKartta()[0][i] == null 
+                    && testiLauta.getKartta()[testiLauta.getKartta().length - 1][i] == null);
+        }
+    }
+
+    /**
+     * Test of setKartta method, of class Lauta.
+     */
+    @Test
+    public void testSetKartta() {
+        Asia[][] UusiKartta = new Asia[10][20];
+        testiLauta.setKartta(UusiKartta);
+        
+        assertEquals(10, testiLauta.getKartta().length);
+        assertEquals(20, testiLauta.getKartta()[0].length);
     }
 
     /**
@@ -44,40 +72,9 @@ public class LautaTest {
      */
     @Test
     public void testLisaaObjekti() {
-        System.out.println("lisaaObjekti");
-        Asia obj = null;
-        Lauta instance = null;
-        instance.lisaaObjekti(obj);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getKartta method, of class Lauta.
-     */
-    @Test
-    public void testGetKartta() {
-        System.out.println("getKartta");
-        Lauta instance = null;
-        Asia[][] expResult = null;
-        Asia[][] result = instance.getKartta();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getObjektit method, of class Lauta.
-     */
-    @Test
-    public void testGetObjektit() {
-        System.out.println("getObjektit");
-        Lauta instance = null;
-        ArrayList<Asia> expResult = null;
-        ArrayList<Asia> result = instance.getObjektit();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Hahmo testi = new Hahmo(testiLauta);
+        
+        assertTrue(testiLauta.getObjektit().contains(testi));
     }
 
     /**
@@ -85,11 +82,16 @@ public class LautaTest {
      */
     @Test
     public void testPaivita() {
-        System.out.println("paivita");
-        Lauta instance = null;
-        instance.paivita();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Hahmo esko = new Hahmo(testiLauta);
+        int[] eskonSij = esko.sijainti();
+        
+        while(esko.oikealle()) {
+            testiLauta.paivita();
+        }
+        
+        assertTrue(esko.equals(testiLauta.getKartta()[testiLauta.getKartta().length - 2][eskonSij[1]]));
     }
+
+    
     
 }

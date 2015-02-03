@@ -8,7 +8,8 @@ package thechase.logiikka.asiat;
 import java.awt.Color;
 
 /**
- * 
+ * Seinän luova luokka. Asia jota ei voi ylittää, siitä ei  voi alittaa. 
+ * Täytyy mennä ympäri!
  * @author TheArctic
  */
 public class Seina implements Asia {
@@ -43,5 +44,7 @@ public class Seina implements Asia {
     public Color GetVari() {
         return Color.LIGHT_GRAY;
     }
+
+    
     
 }

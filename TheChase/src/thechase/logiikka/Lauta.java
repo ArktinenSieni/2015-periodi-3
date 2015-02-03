@@ -12,8 +12,8 @@ import thechase.logiikka.asiat.Asia;
 
 /**
  * Karttana toimiva luokka. Tältä noudetaan kartta ja siinä olevat objektit.
- * Kartta on <Code>Hahmo</Code>ja sekä piirtämistä varten, kun taas objektien on
- * yksinomaan <Code>Hahmo</Code>jen reitinlaskennan nopeuttamista varten.
+ * Kartta on Hahmoja sekä piirtämistä varten, kun taas objektit-lista on
+ * yksinomaan Hahmojen reitinlaskentaa varten. 
  * @author TheArctic
  */
 public class Lauta implements Paivitettava{
@@ -29,8 +29,7 @@ public class Lauta implements Paivitettava{
      */
     public Lauta(int leveys, int korkeus) {
         gene = new KarttaGeneroija();
-        kartta = new Asia[korkeus][leveys];
-        setKartta(gene.generoiTemplate(kartta));
+        setKartta(gene.generoiTemplate(new Asia[korkeus][leveys]));
         objektit = new ArrayList<Asia>();
         vanhats = new ArrayDeque<int[]>();
     }
@@ -41,6 +40,7 @@ public class Lauta implements Paivitettava{
      */
     public void setKartta(Asia[][] uusi) {
         this.kartta = uusi;
+        
     }
     /**
      * Lisää liikkuvan/muuttuvan objektin.
