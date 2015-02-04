@@ -45,6 +45,7 @@ public class LautaTest {
 
     @Test
     public void testKartanLuontiReunat() {
+        System.out.println("Reunojen luonti");
         for (int i = 0; i < testiLauta.getKartta().length; i++) {
             assertFalse(testiLauta.getKartta()[i][0] == null 
                     && testiLauta.getKartta()[i][testiLauta.getKartta()[i].length - 1] == null);
@@ -60,6 +61,7 @@ public class LautaTest {
      */
     @Test
     public void testSetKartta() {
+        System.out.println("Kartan asettaminen");
         Asia[][] UusiKartta = new Asia[10][20];
         testiLauta.setKartta(UusiKartta);
         
@@ -72,6 +74,7 @@ public class LautaTest {
      */
     @Test
     public void testLisaaObjekti() {
+        System.out.println("Objektin lisääminen");
         Hahmo testi = new Hahmo(testiLauta);
         
         assertTrue(testiLauta.getObjektit().contains(testi));
@@ -82,6 +85,7 @@ public class LautaTest {
      */
     @Test
     public void testPaivita() {
+        System.out.println("Laudan päivittäminen");
         Hahmo esko = new Hahmo(testiLauta);
         int[] eskonSij = esko.sijainti();
         

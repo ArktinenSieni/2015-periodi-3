@@ -26,7 +26,7 @@ public interface Asia {
      */
     public boolean ylitettava();
     /**
-     * Helpottaa graafisen käyttöliittymän ruudun värittämistä.
+     * Palauttaa värin. Helpottaa graafisen käyttöliittymän ruudun värittämistä.
      * @return Asia:n väri
      */
     public Color GetVari();

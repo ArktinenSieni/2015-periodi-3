@@ -8,9 +8,11 @@ package thechase.logiikka.asiat;
 import java.awt.Color;
 import java.util.ArrayList;
 import thechase.logiikka.Lauta;
+import thechase.logiikka.Suunta;
+import thechase.logiikka.algoritmit.Algoritmi;
 
 /**
- * Tästä luokasta tehdään hirviö- ja sankari-oiot.
+ * Tästä luokasta tehdään hirviö- ja sankari-oliot.
  *
  * @author TheArctic
  *
@@ -24,6 +26,7 @@ public class Hahmo implements Asia {
     private int maxX;
     private int maxY;
     private boolean pahis;
+    private Algoritmi algoritmi;
 
     /**
      * Luo Hahmon.
@@ -39,7 +42,17 @@ public class Hahmo implements Asia {
         this.y = maxY / 2;
         lauta.lisaaObjekti(this);
         pahis = false;
-
+        
+    }
+    
+    public void setAlgo(Algoritmi algo) {
+        this.algoritmi = algo;
+    }
+    
+    public void liiku() {
+        Suunta suunta = this.algoritmi.etene();
+        this.x += suunta.x;
+        this.y += suunta.y;
     }
 
     /**
@@ -49,12 +62,12 @@ public class Hahmo implements Asia {
      * @param y
      */
     public boolean setSijainti(int x, int y) {
-        if ((x < maxX && x > 0) && (y < maxY && y > 0)) {
+        if ((x < maxX && x > 0) && (y < maxY && y > 0) && (kartta[x][y] == null || kartta[x][y].ylitettava())) {
             this.x = x;
             this.y = y;
             return true;
         } else {
-            System.out.println("Virheelliset parametrit" + x + " " + y);
+            System.out.println("Virheelliset parametrit: " + x + " " + y);
             return false;
         }
 
@@ -71,12 +84,23 @@ public class Hahmo implements Asia {
     public boolean getPahis() {
         return pahis;
     }
+    
+    /**
+     * Onko yläruutu vapaa.
+     * @return onko vapaa.
+     */
+    public boolean ylosVapaa() {
+        if (this.y > 0 && (kartta[x][y - 1] == null || kartta[x][y - 1].ylitettava())) {
+            return true;
+        }
+        return false;
+    }
     /**
      * Liikuttaa Hahmoa ylös.
      * @return onnustuiko siirtyminen.
      */
     public boolean ylos() {
-        if (this.y > 0 && (kartta[x][y - 1] == null || kartta[x][y - 1].ylitettava())) {
+        if (ylosVapaa()) {
             setSijainti(x, y - 1);
             return true;
         } else {
@@ -84,13 +108,24 @@ public class Hahmo implements Asia {
             return false;
         }
     }
-
+    
+    /**
+     * Onko alempi ruutu vapaa.
+     * @return onko vapaa.
+     */
+    public boolean alasVapaa() {
+        if (this.y < this.maxY && (kartta[x][y + 1] == null || kartta[x][y + 1].ylitettava())) {
+            return true;
+        }
+        return false;
+    }
+    
     /**
      * Liikuttaa Hahmoa alas.
      * @return onnustuiko siirtyminen.
      */
     public boolean alas() {
-        if (this.y < this.maxY && (kartta[x][y + 1] == null || kartta[x][y + 1].ylitettava())) {
+        if (alasVapaa()) {
             setSijainti(x, y + 1);
             return true;
         } else {
@@ -98,13 +133,24 @@ public class Hahmo implements Asia {
             return false;
         }
     }
-
+    
+    /**
+     * Onko vasemmanpuoleinen ruutu vapaa.
+     * @return onko vapaa.
+     */
+    public boolean vasemmalleVapaa() {
+        if (this.x > 0 && (kartta[x - 1][y] == null || kartta[x - 1][y].ylitettava())) {
+            return true;
+        }
+        return false;
+    }
+    
     /**
      * Liikuttaa Hahmoa vasemmalle.
      * @return onnustuiko siirtyminen.
      */
     public boolean vasemmalle() {
-        if (this.x > 0 && (kartta[x - 1][y] == null || kartta[x - 1][y].ylitettava())) {
+        if (vasemmalleVapaa()) {
             setSijainti(x - 1, y);
             return true;
         } else {
@@ -113,12 +159,19 @@ public class Hahmo implements Asia {
         }
     }
 
+    public boolean oikealleVapaa() {
+        if (this.x < this.maxX && (kartta[x + 1][y] == null || kartta[x + 1][y].ylitettava())) {
+            return true;
+        }
+        return false;
+    }
+    
     /**
      * Liikuttaa Hahmoa oikealle.
      * @return onnustuiko siirtyminen.
      */
     public boolean oikealle() {
-        if (this.x < this.maxX && (kartta[x + 1][y] == null || kartta[x + 1][y].ylitettava())) {
+        if (oikealleVapaa()) {
             setSijainti(x + 1, y);
             return true;
         } else {

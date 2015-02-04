@@ -48,13 +48,21 @@ public class HahmoTest {
      */
     @Test
     public void testSetSijainti() {
+        System.out.println("Sijainnin asettaminen");
         int x = 4;
         int y = 7;
         
+        System.out.println("    Oikean sijainnin asettaminen");
         esko.setSijainti(x, y);
         int[] eskonSij = esko.sijainti();
         
         assertTrue(eskonSij[0] == x && eskonSij[1] == y);
+        
+        System.out.println("    Laudan ulkopuolelle asettaminen");
+        assertFalse(esko.setSijainti(20, 20));
+        
+        System.out.println("    Seinän päälle asettaminen");
+        assertFalse(esko.setSijainti(0, 0));
     }
 
     
@@ -64,15 +72,24 @@ public class HahmoTest {
      */
     @Test
     public void testSuunnat() {
+        System.out.println("Suuntametodit");
+        
+        System.out.println("    oikeaan reunaan saakka");
         while(esko.oikealle()) {
             testiLauta.paivita();
         }
+        
+        System.out.println("    alareunaan saakka");
         while(esko.alas()) {
             testiLauta.paivita();
         }
+        
+        System.out.println("    vasempaan reunaan saakka");
         while(esko.vasemmalle()) {
             testiLauta.paivita();
         }
+        
+        System.out.println("    yläreunaan saakka");
         while(esko.ylos()) {
             testiLauta.paivita();
         }
