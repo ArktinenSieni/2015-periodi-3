@@ -104,7 +104,6 @@ public class Hahmo implements Asia {
             setSijainti(x, y - 1);
             return true;
         } else {
-            System.out.println("Yngh!");
             return false;
         }
     }
@@ -129,7 +128,6 @@ public class Hahmo implements Asia {
             setSijainti(x, y + 1);
             return true;
         } else {
-            System.out.println("Yngh!");
             return false;
         }
     }
@@ -154,8 +152,7 @@ public class Hahmo implements Asia {
             setSijainti(x - 1, y);
             return true;
         } else {
-            System.out.println("Yngh!");
-            return false;
+           return false;
         }
     }
 
@@ -175,7 +172,6 @@ public class Hahmo implements Asia {
             setSijainti(x + 1, y);
             return true;
         } else {
-            System.out.println("Yngh!");
             return false;
         }
     }

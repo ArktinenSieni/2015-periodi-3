@@ -65,8 +65,6 @@ public class HahmoTest {
         assertFalse(esko.setSijainti(0, 0));
     }
 
-    
-
     /**
      * Test of oikealle method, of class Hahmo.
      */
