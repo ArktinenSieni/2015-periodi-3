@@ -1,11 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package thechase.logiikka.asiat;
 
 import java.awt.Color;
+import java.awt.Point;
 import java.util.ArrayList;
 import thechase.logiikka.Lauta;
 import thechase.logiikka.Suunta;
@@ -42,17 +39,19 @@ public class Hahmo implements Asia {
         this.y = maxY / 2;
         lauta.lisaaObjekti(this);
         pahis = false;
-        
+
     }
-    
+
     public void setAlgo(Algoritmi algo) {
         this.algoritmi = algo;
     }
-    
+
     public void liiku() {
-        Suunta suunta = this.algoritmi.etene();
-        this.x += suunta.x;
-        this.y += suunta.y;
+        if (algoritmi != null) {
+            Suunta suunta = this.algoritmi.etene();
+            this.x += suunta.x;
+            this.y += suunta.y;
+        }
     }
 
     /**
@@ -72,7 +71,7 @@ public class Hahmo implements Asia {
         }
 
     }
-    
+
     public void setPahis() {
         if (this.pahis) {
             pahis = false;
@@ -84,9 +83,10 @@ public class Hahmo implements Asia {
     public boolean getPahis() {
         return pahis;
     }
-    
+
     /**
      * Onko yläruutu vapaa.
+     *
      * @return onko vapaa.
      */
     public boolean ylosVapaa() {
@@ -95,8 +95,10 @@ public class Hahmo implements Asia {
         }
         return false;
     }
+
     /**
      * Liikuttaa Hahmoa ylös.
+     *
      * @return onnustuiko siirtyminen.
      */
     public boolean ylos() {
@@ -107,9 +109,10 @@ public class Hahmo implements Asia {
             return false;
         }
     }
-    
+
     /**
      * Onko alempi ruutu vapaa.
+     *
      * @return onko vapaa.
      */
     public boolean alasVapaa() {
@@ -118,9 +121,10 @@ public class Hahmo implements Asia {
         }
         return false;
     }
-    
+
     /**
      * Liikuttaa Hahmoa alas.
+     *
      * @return onnustuiko siirtyminen.
      */
     public boolean alas() {
@@ -131,9 +135,10 @@ public class Hahmo implements Asia {
             return false;
         }
     }
-    
+
     /**
      * Onko vasemmanpuoleinen ruutu vapaa.
+     *
      * @return onko vapaa.
      */
     public boolean vasemmalleVapaa() {
@@ -142,9 +147,10 @@ public class Hahmo implements Asia {
         }
         return false;
     }
-    
+
     /**
      * Liikuttaa Hahmoa vasemmalle.
+     *
      * @return onnustuiko siirtyminen.
      */
     public boolean vasemmalle() {
@@ -152,7 +158,7 @@ public class Hahmo implements Asia {
             setSijainti(x - 1, y);
             return true;
         } else {
-           return false;
+            return false;
         }
     }
 
@@ -162,9 +168,10 @@ public class Hahmo implements Asia {
         }
         return false;
     }
-    
+
     /**
      * Liikuttaa Hahmoa oikealle.
+     *
      * @return onnustuiko siirtyminen.
      */
     public boolean oikealle() {
@@ -177,12 +184,8 @@ public class Hahmo implements Asia {
     }
 
     @Override
-    public int[] sijainti() {
-        int[] s = new int[2];
-        s[0] = x;
-        s[1] = y;
-
-        return s;
+    public Point sijainti() {
+        return new Point(x, y);
     }
 
     @Override
@@ -192,9 +195,9 @@ public class Hahmo implements Asia {
 
     @Override
     public String toString() {
-        if(pahis) {
+        if (pahis) {
             return "M";
-        } 
+        }
         return "H";
     }
 
@@ -235,7 +238,5 @@ public class Hahmo implements Asia {
         }
         return true;
     }
-
-    
 
 }

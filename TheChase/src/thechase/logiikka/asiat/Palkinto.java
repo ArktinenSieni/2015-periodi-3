@@ -6,6 +6,7 @@
 package thechase.logiikka.asiat;
 
 import java.awt.Color;
+import java.awt.Point;
 import thechase.logiikka.Lauta;
 
 /**
@@ -35,12 +36,8 @@ public class Palkinto implements Asia{
     }
     
     @Override
-    public int[] sijainti() {
-        int[] s = new int[2];
-        s[0] = x;
-        s[1] = y;
-
-        return s;        
+    public Point sijainti() {
+        return new Point(x,y);       
     }
 
     @Override

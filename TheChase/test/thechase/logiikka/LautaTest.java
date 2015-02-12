@@ -5,13 +5,14 @@
  */
 package thechase.logiikka;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import thechase.logiikka.asiat.Asia;
 import thechase.logiikka.asiat.Hahmo;
 
@@ -87,13 +88,14 @@ public class LautaTest {
     public void testPaivita() {
         System.out.println("Laudan päivittäminen");
         Hahmo esko = new Hahmo(testiLauta);
-        int[] eskonSij = esko.sijainti();
+        Point eskonSij = esko.sijainti();
         
         while(esko.oikealle()) {
             testiLauta.paivita();
+            eskonSij = esko.sijainti();
+            assertTrue(esko.equals(testiLauta.getKartta()[eskonSij.x][eskonSij.y]));
         }
         
-        assertTrue(esko.equals(testiLauta.getKartta()[testiLauta.getKartta().length - 2][eskonSij[1]]));
     }
 
     

@@ -5,6 +5,7 @@
  */
 package thechase.logiikka;
 
+import java.awt.Point;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
@@ -19,7 +20,7 @@ import thechase.logiikka.asiat.Asia;
 public class Lauta implements Paivitettava{
     private Asia[][] kartta;
     private ArrayList<Asia> objektit;
-    private ArrayDeque<int[]> vanhats;
+    private ArrayDeque<Point> vanhats;
     private KarttaGeneroija gene;
     
     /**
@@ -31,7 +32,10 @@ public class Lauta implements Paivitettava{
         gene = new KarttaGeneroija();
         setKartta(gene.generoiTemplate(new Asia[korkeus][leveys]));
         objektit = new ArrayList<Asia>();
-        vanhats = new ArrayDeque<int[]>();
+        vanhats = new ArrayDeque<Point>();
+        
+        //Testi
+        setKartta(gene.generoiEsteita(kartta, 5));
     }
     
     /**
@@ -63,22 +67,22 @@ public class Lauta implements Paivitettava{
     @Override
     public void paivita() {
         for (int i = 0; i < objektit.size(); i++) {
-            int[] sij = vanhats.poll();
-            kartta[sij[0]][sij[1]] = null;
+            Point sij = vanhats.poll();
+            kartta[sij.x][sij.y] = null;
             
-            int uusi[] = objektit.get(i).sijainti();
-            kartta[uusi[0]][uusi[1]] = objektit.get(i);
+            Point uusi = objektit.get(i).sijainti();
+            kartta[uusi.x][uusi.y] = objektit.get(i);
             vanhats.add(uusi);
         }
         while (!vanhats.isEmpty()) {
-            int[] sij = vanhats.poll();
-            kartta[sij[0]][sij[1]] = null;
+            Point sij = vanhats.poll();
+            kartta[sij.x][sij.y] = null;
         }
         
         for (Asia a : objektit) {
-            int[] sijainti = a.sijainti();
+            Point sijainti = a.sijainti();
             vanhats.add(sijainti);
-            kartta[sijainti[0]][sijainti[1]] = a;
+            kartta[sijainti.x][sijainti.y] = a;
         }
     }
 

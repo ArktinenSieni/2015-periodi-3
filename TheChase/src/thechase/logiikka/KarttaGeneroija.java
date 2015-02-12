@@ -5,6 +5,7 @@
  */
 package thechase.logiikka;
 
+import java.util.Random;
 import thechase.logiikka.asiat.Asia;
 import thechase.logiikka.asiat.Seina;
 
@@ -13,9 +14,10 @@ import thechase.logiikka.asiat.Seina;
  * @author TheArctic
  */
 public class KarttaGeneroija {
+    private Random arpoja;
     
     public KarttaGeneroija() {
-        
+        arpoja = new Random();
     }
     /**
      * Piirtää ulkoseinät
@@ -31,6 +33,26 @@ public class KarttaGeneroija {
         for (int i = 0; i < kartta[0].length; i++) {
             kartta[0][i] = new Seina(0, i);
             kartta[kartta.length - 1][i] = new Seina(kartta.length - 1, i);
+        }
+        
+        return kartta;
+    }
+    
+    public Asia[][] generoiEsteita(Asia[][] kartta, int tiheys) {
+        int tih = tiheys;
+        
+        if (tih > 50) {
+            tih = 49;
+        }
+        
+        for (int i = 0; i < kartta.length; i++) {
+            for (int j = 0; j < kartta[0].length; j++) {
+                int arpa = arpoja.nextInt(100);
+                
+                if (arpa <= tih) {
+                    kartta[i][j] = new Seina(i, j);
+                }
+            }
         }
         
         return kartta;

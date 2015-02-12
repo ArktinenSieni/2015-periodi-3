@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package thechase.UI;
 
 import java.awt.Container;
@@ -16,36 +12,43 @@ import thechase.logiikka.Paivitettava;
  *
  * @author TheArctic
  */
-public class GUI implements Runnable, Paivitettava{
+public class GUI implements Runnable, Paivitettava {
+
     private JFrame frame;
     private Lauta lauta;
     private Piirtoalusta alusta;
-    
+
     public GUI(Lauta lauta) {
         this.lauta = lauta;
         this.alusta = new Piirtoalusta(lauta);
     }
-    
 
     @Override
     public void run() {
         frame = new JFrame("Jahtimakkara");
+        int korkeus;
+        int leveys;
         
-        final int korkeus = lauta.getKartta().length * 10 + 20;
-        final int leveys = lauta.getKartta()[0].length * 10;
+        if (lauta.getKartta().length < 100) {
+            korkeus = lauta.getKartta().length * 10 + 20;
+            leveys = lauta.getKartta()[0].length * 10;
+        } else {
+            korkeus = lauta.getKartta().length + 2;
+            leveys = lauta.getKartta()[0].length; 
+        }
         Dimension koko = new Dimension(leveys, korkeus);
-        
+
         frame.setPreferredSize(koko);
-        
+
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        
+
         luoKomponentit(frame.getContentPane());
-        
+
         frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
     }
-    
+
     private void luoKomponentit(Container container) {
         container.add(alusta);
     }
@@ -59,5 +62,5 @@ public class GUI implements Runnable, Paivitettava{
     public Paivitettava getPaivitettava() {
         return alusta;
     }
-    
+
 }

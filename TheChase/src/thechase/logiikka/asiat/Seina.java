@@ -6,6 +6,7 @@
 package thechase.logiikka.asiat;
 
 import java.awt.Color;
+import java.awt.Point;
 
 /**
  * Seinän luova luokka. Asia jota ei voi ylittää, siitä ei  voi alittaa. 
@@ -22,12 +23,8 @@ public class Seina implements Asia {
     }
 
     @Override
-    public int[] sijainti() {
-        int [] sij = new int[2];
-        sij[0] = x;
-        sij[1] = y;
-        
-        return sij;
+    public Point sijainti() {
+        return new Point(x, y);
     }
 
     @Override

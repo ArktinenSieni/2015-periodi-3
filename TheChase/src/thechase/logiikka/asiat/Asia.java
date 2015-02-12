@@ -6,6 +6,7 @@
 package thechase.logiikka.asiat;
 
 import java.awt.Color;
+import java.awt.Point;
 
 /**
  * Pohjustaa jokaiselle asialle, esteelle, hahmolle sijainnin.
@@ -19,7 +20,7 @@ public interface Asia {
      * @return Palauttaa sijainnin. Paikalla 0 on x-, ja 1 y-parametri.
      * 
      */
-    public int[] sijainti();
+    public Point sijainti();
     /**
      * Kertoo voiko Asian yli kulkea.
      * @return Onko ylitettävä vai ei?

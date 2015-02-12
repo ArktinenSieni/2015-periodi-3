@@ -5,12 +5,13 @@
  */
 package thechase.logiikka.asiat;
 
+import java.awt.Point;
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import thechase.logiikka.Lauta;
 
 /**
@@ -54,13 +55,18 @@ public class HahmoTest {
         
         System.out.println("    Oikean sijainnin asettaminen");
         esko.setSijainti(x, y);
-        int[] eskonSij = esko.sijainti();
+        Point eskonSij = esko.sijainti();
         
-        assertTrue(eskonSij[0] == x && eskonSij[1] == y);
-        
+        assertTrue(eskonSij.x == x && eskonSij.y == y);
+    }
+    
+    @Test
+    public void testSetSijainti2() {
         System.out.println("    Laudan ulkopuolelle asettaminen");
         assertFalse(esko.setSijainti(20, 20));
-        
+    }
+    
+    @Test public void testSetSijainti3() {
         System.out.println("    Seinän päälle asettaminen");
         assertFalse(esko.setSijainti(0, 0));
     }
@@ -92,9 +98,9 @@ public class HahmoTest {
             testiLauta.paivita();
         }
         
-        int[] eskonSij = esko.sijainti();
+        Point eskonSij = esko.sijainti();
         
-        assertTrue(eskonSij[0] == 1 && eskonSij[1] == 1);
+        assertTrue(eskonSij.x == 1 && eskonSij.y == 1);
     }
 
     

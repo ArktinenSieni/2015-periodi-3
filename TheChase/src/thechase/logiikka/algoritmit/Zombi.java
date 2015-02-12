@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package thechase.logiikka.algoritmit;
 
+import java.awt.Point;
 import thechase.logiikka.Suunta;
 import thechase.logiikka.asiat.Asia;
 import thechase.logiikka.asiat.Hahmo;
@@ -14,51 +11,51 @@ import thechase.logiikka.asiat.Hahmo;
  * @author TheArctic
  */
 public class Zombi implements Algoritmi {
-    private Hahmo h;
+    private Hahmo hahmo;
     private Asia kohde;
-    private int pienin;
+    private int pieninEtaisyysKohteeseen;
     private Suunta minne;
     
     public Zombi (Hahmo hahmo, Asia kohde) {
-        this.h = hahmo;
+        this.hahmo = hahmo;
         this.kohde = kohde;
     }
     
     private int etaisyysKohteeseen(int mistaX, int mistaY) {
-        int[] minne = kohde.sijainti();
-        int minneX = minne[0];
-        int minneY = minne[1];
+        Point minne = kohde.sijainti();
+        int minneX = minne.x;
+        int minneY = minne.y;
         
         return Math.abs(mistaX - minneX) + Math.abs(mistaY - minneY);
     }
     
     public void onkoParempi(Suunta ehdotus) {
-        int[] hsij = h.sijainti();
-        int hx = hsij[0];
-        int hy = hsij[1];
+        Point hahmonSijainti = hahmo.sijainti();
+        int hx = hahmo.sijainti().x;
+        int hy = hahmo.sijainti().y;
         
         int ehdotusEtaisyys = etaisyysKohteeseen(hx + ehdotus.x, hy + ehdotus.y);
-        if (ehdotusEtaisyys < pienin) {
-            pienin = ehdotusEtaisyys;
+        if (ehdotusEtaisyys < pieninEtaisyysKohteeseen) {
+            pieninEtaisyysKohteeseen = ehdotusEtaisyys;
             minne = ehdotus;
         }
     }
     
     @Override
     public Suunta etene() {
-        pienin = Integer.MAX_VALUE;
+        pieninEtaisyysKohteeseen = Integer.MAX_VALUE;
         minne = Suunta.ISTU;
         
-        if (h.alasVapaa()) {
+        if (hahmo.alasVapaa()) {
             onkoParempi(Suunta.ALAS);
         }
-        if (h.ylosVapaa()) {
+        if (hahmo.ylosVapaa()) {
             onkoParempi(Suunta.YLOS);
         }
-        if (h.vasemmalleVapaa()) {
+        if (hahmo.vasemmalleVapaa()) {
             onkoParempi(Suunta.VASEN);
         }
-        if (h.oikealleVapaa()) {
+        if (hahmo.oikealleVapaa()) {
             onkoParempi(Suunta.OIKEA);
         }
         

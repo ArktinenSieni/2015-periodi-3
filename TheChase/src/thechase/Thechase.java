@@ -1,16 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package thechase;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import thechase.UI.GUI;
 import thechase.UI.TekstiUI;
 import thechase.logiikka.Lauta;
 import thechase.logiikka.Paivitettava;
+import thechase.logiikka.algoritmit.Zombi;
 import thechase.logiikka.asiat.Hahmo;
 import thechase.logiikka.asiat.Palkinto;
 
@@ -19,7 +20,6 @@ import thechase.logiikka.asiat.Palkinto;
  * @author TheArctic
  */
 public class Thechase {
-    private boolean gameOver;
     private Lauta lauta;
     private Hahmo sankari;
     private Hahmo hirvio;
@@ -34,21 +34,26 @@ public class Thechase {
     
     
     public Thechase() {
-        gameOver = false;
-        lauta = new Lauta(50, 30);
+        lauta = new Lauta(99, 99);
         
         //objektit testejä varten. Myöhemmin koodaan niin ettei tarvitse kovakoodata
         sankari = new Hahmo(lauta);
         hirvio = new Hahmo(lauta);
         arpoja = new Random();
-        palkinto = new Palkinto(3, 4, lauta);
+        palkinto = new Palkinto(arpoja.nextInt(lauta.getKartta().length - 2) + 1, arpoja.nextInt(lauta.getKartta()[0].length - 2) + 1, lauta);
         
         hirvio.setSijainti(arpoja.nextInt(lauta.getKartta().length - 2) + 1, arpoja.nextInt(lauta.getKartta()[0].length - 2) + 1);
+        sankari.setSijainti(arpoja.nextInt(lauta.getKartta().length - 2) + 1, arpoja.nextInt(lauta.getKartta()[0].length - 2) + 1);
         lauta.paivita();
         
         // testimetodeita
         this.UITesti = new TekstiUI(lauta);
         this.GUITesti = new GUI(lauta);
+        
+        //Päivitettävät objektit
+        paivitettavat = new ArrayList<Paivitettava>();
+        paivitettavat.add(lauta);
+        paivitettavat.add(GUITesti);
     }
     
     /**
@@ -56,41 +61,60 @@ public class Thechase {
      */
     public void kaynnista() {
         hirvio.setPahis();
+        sankari.setAlgo(new Zombi(sankari, palkinto));
+        hirvio.setAlgo(new Zombi(hirvio, sankari));
         GUITesti.run();
+        peliLooppi();
         
+        System.exit(0);
     }
     
     /**
      * Tarkastaa pelin jatkumisen ehdot.
      */
-    public void gameOver() {
+    public boolean gameOver() {
         // Sankarin Sijainti
-        int[] SS = sankari.sijainti();
+        Point SS = sankari.sijainti();
         // Hirviön sijainti
-        int[] HS = hirvio.sijainti();
+        Point HS = hirvio.sijainti();
         // Palkinnon sijainti
-        int[] PS = palkinto.sijainti();
+        Point PS = palkinto.sijainti();
         
-        if (SS[0] == HS[0] && SS[1] == HS[1]) {
-            this.gameOver = true;
+        if (SS.x == HS.x && SS.y == HS.y) {
             System.out.println("Sankari syötiin!");
-        } else if (SS[0] == PS[0] && SS[1] == PS[1]) {
-            this.gameOver = true;
+            return true;
+        } else if (SS.x == PS.x && SS.y == PS.y) {
             System.out.println("Aarre löytyi!");
+            return true;
         }
         
+        return false;
     }
     
     /**
      * Huolehtii pelin tapahtumien toteuttamisesta oikeassa järjestyksessä.
      */
     private void peliLooppi() {
-        
-        while(!gameOver) {
+//        Scanner lukija = new Scanner(System.in);
+        while(!gameOver()) {
+            try {
+                Thread.sleep(25);
+            } catch (InterruptedException ex) {
+                continue;
+            }
+            hirvio.liiku();
+            sankari.liiku();
             for (Paivitettava p : paivitettavat) {
+//                System.out.println("Paina enteriä edetäksesi");
+//                String komento = "kana";
+//                
+//                while (!komento.equals("")) {
+//                    komento = lukija.nextLine();
+//                }
                 p.paivita();
             }
         }
+        
     }
     
     
