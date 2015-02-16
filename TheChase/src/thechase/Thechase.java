@@ -35,6 +35,7 @@ public class Thechase {
     
     public Thechase() {
         lauta = new Lauta(99, 99);
+        lauta.getGeneroija().generoiEsteita(lauta.getKartta(), 5);
         
         //objektit testejä varten. Myöhemmin koodaan niin ettei tarvitse kovakoodata
         sankari = new Hahmo(lauta);

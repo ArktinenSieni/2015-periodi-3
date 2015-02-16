@@ -34,8 +34,6 @@ public class Lauta implements Paivitettava{
         objektit = new ArrayList<Asia>();
         vanhats = new ArrayDeque<Point>();
         
-        //Testi
-        setKartta(gene.generoiEsteita(kartta, 5));
     }
     
     /**
@@ -54,6 +52,14 @@ public class Lauta implements Paivitettava{
         objektit.add(obj);
         vanhats.add(obj.sijainti());
         this.paivita();
+    }
+    
+    /**
+     * Palauttaa generoijan. Oleellinen kentän alustamisessa.
+     * @return 
+     */
+    public KarttaGeneroija getGeneroija() {
+        return this.gene;
     }
 
     public Asia[][] getKartta() {

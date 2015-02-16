@@ -16,24 +16,14 @@ import thechase.logiikka.Lauta;
 public class Palkinto implements Asia{
     private final int x;
     private final int y;
-    private boolean keratty;
-    private boolean avoinna;
     
     public Palkinto (int x, int y, Lauta lauta) {
         this.x = x;
         this.y = y;
-        this.avoinna = true;
-        
         lauta.lisaaObjekti(this);
     }
     
-    /**
-     * Kertoo onko kerätty. Jos on kerätty, ei siihen vaikuta enään hahmon toiminta.
-     * @param arvo 
-     */
-    public void setKeratty(boolean arvo) {
-        this.keratty = arvo;
-    }
+    
     
     @Override
     public Point sijainti() {

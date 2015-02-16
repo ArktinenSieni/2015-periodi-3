@@ -7,7 +7,7 @@ import thechase.logiikka.asiat.Asia;
 import thechase.logiikka.asiat.Hahmo;
 
 /**
- *
+ * Algoritmi joka liikkuu sokeasti kohti kohdettaan, välittämättä esteistään.
  * @author TheArctic
  */
 public class Zombi implements Algoritmi {
@@ -21,6 +21,12 @@ public class Zombi implements Algoritmi {
         this.kohde = kohde;
     }
     
+    /**
+     * Laskee etäisyyden hahmosta hahmon kohteeseen. Oleellinen hahmon ruudunvalinnassa.
+     * @param mistaX Mistä ruudusta tarkastellaan etäisyyttä x-akselilla.
+     * @param mistaY Mistä ruudusta tarkastellaan etäisyyttä y-akselilla
+     * @return palauttaa Manhattan etäisyyden kohteeseen.
+     */
     private int etaisyysKohteeseen(int mistaX, int mistaY) {
         Point minne = kohde.sijainti();
         int minneX = minne.x;
@@ -29,6 +35,10 @@ public class Zombi implements Algoritmi {
         return Math.abs(mistaX - minneX) + Math.abs(mistaY - minneY);
     }
     
+    /**
+     * Vertaa ehdotettua ruutua nykyiseen parhaaseen vaihtoehto-ruutuun.
+     * @param ehdotus Mihin kannattaa siirtyä. Jos ehdotettu ruutu on parempi kuin vanha, se palautetaan ja päinvastoin.
+     */
     public void onkoParempi(Suunta ehdotus) {
         Point hahmonSijainti = hahmo.sijainti();
         int hx = hahmo.sijainti().x;
@@ -41,6 +51,10 @@ public class Zombi implements Algoritmi {
         }
     }
     
+    /**
+     * Valitsee parhaan vaihtoehdon vapaana olevista ruuduista
+     * @return Suunta, johon kannattaa siirtyä.
+     */
     @Override
     public Suunta etene() {
         pieninEtaisyysKohteeseen = Integer.MAX_VALUE;
