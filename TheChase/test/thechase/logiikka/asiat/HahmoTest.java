@@ -61,12 +61,12 @@ public class HahmoTest {
     
     @Test
     public void testSetSijainti2() {
-        
+        System.out.println("Hahmon sijainnin asettaminen laudan ulkopuolelle");
         assertFalse(esko.setSijainti(20, 20));
     }
     
     @Test public void testSetSijainti3() {
-        
+        System.out.println("Hahmon sijainnin asettaminen seinän päälle");
         assertFalse(esko.setSijainti(0, 0));
     }
 

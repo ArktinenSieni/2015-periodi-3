@@ -20,13 +20,13 @@ import thechase.logiikka.asiat.Palkinto;
  *
  * @author matti
  */
-public class ZombiTest {
+public class GreedyBestFindTest {
     private Lauta testilauta;
     private Palkinto testipalkinto;
     private Hahmo testihahmo;
-    private Zombi testialgo;
+    private GreedyBestFind testialgo;
     
-    public ZombiTest() {
+    public GreedyBestFindTest() {
     }
     
     @BeforeClass
@@ -46,36 +46,24 @@ public class ZombiTest {
         testihahmo = new Hahmo(testilauta);
         testihahmo.setSijainti(10, 2);
         
-        testialgo = new Zombi(testihahmo, testipalkinto);
+        testialgo = new GreedyBestFind(testihahmo, testipalkinto);
     }
     
     @After
     public void tearDown() {
     }
 
-    /**
-     * Test of onkoParempi method, of class Zombi.
-     */
+    
     @Test
-    public void testOnkoParempiMuuttaaMinneArvoa() {
-        testialgo.onkoParempi(Suunta.YLOS);
-        assertEquals(Suunta.YLOS, testialgo.getMinne());
+    public void testLaskeeKahdenAsianValisenManhattanEtaisyyden() {
+        assertEquals(7, testialgo.etaisyys(testihahmo.sijainti().x, testihahmo.sijainti().y, testipalkinto));
     }
     
     @Test
-    public void testOnkoParempiMuuttaaMinneArvoaOikein() {
-        testialgo.onkoParempi(Suunta.ALAS);
-        testialgo.onkoParempi(Suunta.YLOS);
+    public void testViereisetPalauttaaViereisetVapaatRuudut() {
+        testihahmo.setSijainti(1, 1);
         
-        assertEquals(Suunta.ALAS, testialgo.getMinne());
-    }
-
-    /**
-     * Test of etene method, of class Zombi.
-     */
-    @Test
-    public void testEtenePalauttaaParhaanArvon() {
-        assertEquals(Suunta.ALAS, testialgo.etene());
+        assertEquals(2, testialgo.viereiset(testihahmo.sijainti().x, testihahmo.sijainti().y).size());
     }
     
 }

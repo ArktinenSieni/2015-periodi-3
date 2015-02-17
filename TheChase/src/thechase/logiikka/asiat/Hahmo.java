@@ -24,6 +24,7 @@ public class Hahmo implements Asia {
     private int maxY;
     private boolean pahis;
     private Algoritmi algoritmi;
+    private Lauta lauta;
 
     /**
      * Luo Hahmon.
@@ -31,6 +32,7 @@ public class Hahmo implements Asia {
      * @param lauta Lauta jolle Hahmo luodaan.
      */
     public Hahmo(Lauta lauta) {
+        this.lauta = lauta;
         this.kartta = lauta.getKartta();
         this.objektit = lauta.getObjektit();
         this.maxX = kartta.length - 1;
@@ -41,11 +43,26 @@ public class Hahmo implements Asia {
         pahis = false;
 
     }
-
+    
+    public Asia[][] getKartta() {
+        return lauta.getKartta();
+    }
+    
+    public Point kartanMitat() {
+        return new Point(maxX, maxY);
+    }
+    
+    /**
+     * Asettaa aktiivisen algoritmin, joka antaa liikkumisohjeet.
+     * @param algo haluttu algoritmi
+     */
     public void setAlgo(Algoritmi algo) {
         this.algoritmi = algo;
     }
 
+    /**
+     * Liikkuu valitun algoritmin ohjeiden mukaan.
+     */
     public void liiku() {
         if (algoritmi != null) {
             Suunta suunta = this.algoritmi.etene();

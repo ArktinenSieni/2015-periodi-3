@@ -9,7 +9,7 @@ import thechase.logiikka.Suunta;
  */
 public interface Algoritmi {
     /**
-     * Antaa ruudun mihin suuntaan pelaaja etenee.
+     * Antaa ruudun mihin suuntaan hahmo etenee.
      */
     public Suunta etene();
     

@@ -19,7 +19,13 @@ public class Zombi implements Algoritmi {
     public Zombi (Hahmo hahmo, Asia kohde) {
         this.hahmo = hahmo;
         this.kohde = kohde;
+        pieninEtaisyysKohteeseen = Integer.MAX_VALUE;
     }
+    
+    public Suunta getMinne() {
+        return this.minne;
+    }
+    
     
     /**
      * Laskee etäisyyden hahmosta hahmon kohteeseen. Oleellinen hahmon ruudunvalinnassa.
