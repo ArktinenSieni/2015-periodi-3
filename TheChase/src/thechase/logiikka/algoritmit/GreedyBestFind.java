@@ -17,9 +17,9 @@ import thechase.logiikka.asiat.Palkinto;
  */
 public class GreedyBestFind implements Algoritmi {
 
-    private Hahmo hahmo;
-    private Asia kohde;
-    private boolean[][] onkoKayty;
+    Hahmo hahmo;
+    Asia kohde;
+    boolean[][] onkoKayty;
 
     public GreedyBestFind(Hahmo hahmo, Asia kohde) {
         this.hahmo = hahmo;
@@ -146,7 +146,7 @@ public class GreedyBestFind implements Algoritmi {
      * @param nykyinen solmu, johon Hahmon olisi tarkoitus liikkua
      * @return suunta johon hahmon olisi tarkoitus liikkua
      */
-    private Suunta suunnassa(Solmu nykyinen) {
+    public Suunta suunnassa(Solmu nykyinen) {
         int eroX = nykyinen.sijainti().x- hahmo.sijainti().x;
         int eroY = nykyinen.sijainti().y - hahmo.sijainti().y;
         
