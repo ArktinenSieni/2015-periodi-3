@@ -11,6 +11,7 @@ import thechase.UI.GUI;
 import thechase.UI.TekstiUI;
 import thechase.logiikka.Lauta;
 import thechase.logiikka.Paivitettava;
+import thechase.logiikka.algoritmit.GreedyBestFind;
 import thechase.logiikka.algoritmit.Zombi;
 import thechase.logiikka.asiat.Hahmo;
 import thechase.logiikka.asiat.Palkinto;
@@ -62,16 +63,22 @@ public class Thechase {
      */
     public void kaynnista() {
         hirvio.setPahis();
-        sankari.setAlgo(new Zombi(sankari, palkinto));
+        sankari.setAlgo(new GreedyBestFind(sankari, palkinto));
         hirvio.setAlgo(new Zombi(hirvio, sankari));
         GUITesti.run();
         peliLooppi();
-        
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            System.exit(0);
+        }
         System.exit(0);
     }
     
     /**
      * Tarkastaa pelin jatkumisen ehdot.
+     * 
+     * @return Päättyikö peli?
      */
     public boolean gameOver() {
         // Sankarin Sijainti
@@ -99,12 +106,13 @@ public class Thechase {
 //        Scanner lukija = new Scanner(System.in);
         while(!gameOver()) {
             try {
-                Thread.sleep(25);
+                Thread.sleep(50);
             } catch (InterruptedException ex) {
                 continue;
             }
             hirvio.liiku();
             sankari.liiku();
+            hirvio.liiku();
             for (Paivitettava p : paivitettavat) {
 //                System.out.println("Paina enteriä edetäksesi");
 //                String komento = "kana";

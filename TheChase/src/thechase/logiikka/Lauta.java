@@ -38,7 +38,7 @@ public class Lauta implements Paivitettava{
     
     /**
      * Voidaan asettaa uusi, valmis kartta.
-     * @param uusi 
+     * @param uusi asetettaava kartta
      */
     public void setKartta(Asia[][] uusi) {
         this.kartta = uusi;
@@ -56,7 +56,7 @@ public class Lauta implements Paivitettava{
     
     /**
      * Palauttaa generoijan. Oleellinen kentän alustamisessa.
-     * @return 
+     * @return palauttaa generoijan
      */
     public KarttaGeneroija getGeneroija() {
         return this.gene;

@@ -28,6 +28,10 @@ public class GreedyBestFind implements Algoritmi {
 
     }
 
+    /**
+     * Palauttaa parhaan suuntavaihtoehdon, jonne algoritmin käyttäjän olisi tarkoitus liikkua.
+     * @return Edettävä suunta.
+     */
     @Override
     public Suunta etene() {
         Suunta suunta = Suunta.ISTU;
@@ -53,7 +57,7 @@ public class GreedyBestFind implements Algoritmi {
             viereiset = this.viereiset(nykyinen.sijainti().x, nykyinen.sijainti().y);
             while (!viereiset.isEmpty()) {
                 Point v = viereiset.poll();
-                tutkittavat.add(new Solmu(v.x, v.y, etaisyys(v.x, v.y, kohde)));
+                tutkittavat.add(new Solmu(v.x, v.y, etaisyys(v.x, v.y, kohde), nykyinen));
             }
 
         }
@@ -66,11 +70,12 @@ public class GreedyBestFind implements Algoritmi {
     }
 
     /**
-     * Laskee manhattan-etäisyyden kahden Asian välillä
-     *
-     * @param mista lähtö Asia
-     * @param minne kohde Asia
-     * @return manhattan-etäisyys
+     * Laskee Manhattan-etäisyyden annetuista koordinaateista koheeseen.
+     * 
+     * @param mistaX annettu x-koordinatti
+     * @param mistaY annettu y-koordinaatti
+     * @param kohde annettu kohde
+     * @return Manhattanetäisyys
      */
     public int etaisyys(int mistaX, int mistaY, Asia kohde) {
         return Math.abs(mistaX - kohde.sijainti().x)
@@ -136,6 +141,11 @@ public class GreedyBestFind implements Algoritmi {
         return viereiset;
     }
 
+    /**
+     * Vertaa solmun ja Hahmon koordinaatteja niin, että se saadaan muunnettua suunnaksi.
+     * @param nykyinen solmu, johon Hahmon olisi tarkoitus liikkua
+     * @return suunta johon hahmon olisi tarkoitus liikkua
+     */
     private Suunta suunnassa(Solmu nykyinen) {
         int eroX = nykyinen.sijainti().x- hahmo.sijainti().x;
         int eroY = nykyinen.sijainti().y - hahmo.sijainti().y;
@@ -143,7 +153,8 @@ public class GreedyBestFind implements Algoritmi {
         if (eroX == 0 && eroY == -1) return Suunta.YLOS;
         else if (eroX == 0 && eroY == 1) return Suunta.ALAS;
         else if (eroX == 1 && eroY == 0) return Suunta.OIKEA;
-        return Suunta.VASEN;
+        else if (eroX == -1 && eroY == 0) return Suunta.VASEN;
+        return Suunta.ISTU;
     }
 
 }

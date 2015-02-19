@@ -31,7 +31,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
      * Piirtää kaikki Asia-oliot. Laudan koon ollessa pienempi kuin 100, 
      * piirretään lauta kymmenkertaisena, muutoin koko on yksi yhteen.
      *
-     * @param graphics
+     * @param graphics grafiikat
      */
     public void piirra(Graphics graphics) {
         if (lauta.getKartta().length < 100) {

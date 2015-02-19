@@ -15,6 +15,7 @@ import thechase.logiikka.Lauta;
 import thechase.logiikka.Suunta;
 import thechase.logiikka.asiat.Hahmo;
 import thechase.logiikka.asiat.Palkinto;
+import thechase.logiikka.asiat.Seina;
 
 /**
  *
@@ -47,6 +48,7 @@ public class GreedyBestFindTest {
         testihahmo.setSijainti(10, 2);
         
         testialgo = new GreedyBestFind(testihahmo, testipalkinto);
+        testihahmo.setAlgo(testialgo);
     }
     
     @After
@@ -64,6 +66,33 @@ public class GreedyBestFindTest {
         testihahmo.setSijainti(1, 1);
         
         assertEquals(2, testialgo.viereiset(testihahmo.sijainti().x, testihahmo.sijainti().y).size());
+    }
+    
+    
+    @Test
+    public void testPalauttaaOikeanSuunnan() {
+        assertEquals(Suunta.ALAS, testialgo.etene());
+    }
+    
+    @Test
+    public void testHahmoLoytaaPalkinnon() {
+        
+        for (int i = 0; i < 7; i++) {
+            testihahmo.liiku();
+        }
+        assertEquals(testipalkinto.sijainti(), testihahmo.sijainti());
+    }
+    
+    @Test
+    public void testHahmoLoytaaPalkinnonEsteenTakaa() {
+        for (int i = 8; i <= 12; i++) {
+            testilauta.getKartta()[i][4] = new Seina(i, 4);
+        }
+        
+        for (int i = 0; i < 13; i++) {
+            testihahmo.liiku();
+        }
+        assertEquals(testipalkinto.sijainti(), testihahmo.sijainti());
     }
     
 }

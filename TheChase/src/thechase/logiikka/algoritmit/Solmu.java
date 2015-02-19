@@ -41,7 +41,7 @@ public class Solmu implements Comparable<Solmu> {
     
 
     /**
-     * Palauttaa edellisen solmun.
+     * Palauttaa edellisen solmun. Solmut muodostavat linkitetyn listan kohteesta Hahmoon.
      *
      * @return solmu
      */

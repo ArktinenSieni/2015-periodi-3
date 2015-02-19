@@ -74,8 +74,10 @@ public class Hahmo implements Asia {
     /**
      * Asettaa Hahmon sijainnin.
      *
-     * @param x
-     * @param y
+     * @param x ehdotettu x-koordinaatti
+     * @param y ehdotettu y-koordinaatti
+     * 
+     * @return onnistuiko asettaminen
      */
     public boolean setSijainti(int x, int y) {
         if ((x < maxX && x > 0) && (y < maxY && y > 0) && (kartta[x][y] == null || kartta[x][y].ylitettava())) {
