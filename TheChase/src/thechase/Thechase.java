@@ -36,7 +36,7 @@ public class Thechase {
     
     
     public Thechase() {
-        lauta = new Lauta(99, 99);
+        lauta = new Lauta(50, 50);
         lauta.getGeneroija().generoiEsteita(lauta.getKartta(), 20);
         
         //objektit testejä varten. Myöhemmin koodaan niin ettei tarvitse kovakoodata
@@ -67,7 +67,7 @@ public class Thechase {
     public void kaynnista() {
         hirvio.setPahis();
         
-        sankari.setAlgo(new AStar(sankari, palkinto));
+        sankari.setAlgo(new AStar(sankari, palkinto, hirvio));
         hirvio.setAlgo(new AStar(hirvio, sankari));
         GUITesti.run();
         peliLooppi();
@@ -116,6 +116,7 @@ public class Thechase {
             }
             hirvio.liiku();
             sankari.liiku();
+            
             for (Paivitettava p : paivitettavat) {
 //                System.out.println("Paina enteriä edetäksesi");
 //                String komento = "kana";

@@ -14,11 +14,18 @@ public class AStar implements Algoritmi{
     private Hahmo hahmo;
     private Asia kohde;
     private Solmu[][] kartta;
+    private Asia pahis;
     
     public AStar(Hahmo hahmo, Asia kohde) {
         this.hahmo = hahmo;
         this.kohde = kohde;
-        
+        this.pahis = null;
+    }
+    
+    public AStar(Hahmo hahmo, Asia kohde, Asia pahis) {
+        this.hahmo = hahmo;
+        this.kohde = kohde;
+        this.pahis = pahis;
     }
 
     @Override
@@ -53,7 +60,7 @@ public class AStar implements Algoritmi{
                 if (vierus == null) {
                     continue;
                 }
-                int uusiPaino = nykyinen.getPaino() + 1;
+                int uusiPaino = nykyinen.getPaino() + laskePaino(vierus, pahis);
                 
                 if (!vierus.getKayty() || uusiPaino < vierus.getPaino()) {
                     vierus.setKayty();
@@ -102,6 +109,23 @@ public class AStar implements Algoritmi{
     private int heuristiikka(Solmu seuraava, Asia kohde) {
         return Math.abs(seuraava.sijainti().x - kohde.sijainti().x) 
                 + Math.abs(seuraava.sijainti().y - kohde.sijainti().y);
+    }
+    
+    private int laskePaino(Solmu seuraava, Asia pahis) {
+        if (pahis != null) {
+            int heuristiikka = heuristiikka(seuraava, pahis);
+            if (heuristiikka == 0) return 10;
+            else if (heuristiikka == 1) return 9;
+            else if (heuristiikka == 2) return 8;
+            else if (heuristiikka == 3) return 7;
+            else if (heuristiikka == 4) return 6;
+            else if (heuristiikka == 5) return 5;
+            else if (heuristiikka == 6) return 4;
+            else if (heuristiikka == 7) return 3;
+            else if (heuristiikka == 8) return 2;
+        }
+        
+        return 1;
     }
     
     private Solmu etsiReitistaViereinen(Solmu loppu, Solmu alku) {
