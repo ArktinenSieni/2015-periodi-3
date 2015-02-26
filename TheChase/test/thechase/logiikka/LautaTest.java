@@ -83,22 +83,7 @@ public class LautaTest {
     }
     
 
-    /**
-     * Test of paivita method, of class Lauta.
-     */
-    @Test
-    public void testPaivita() {
-        
-        Hahmo esko = new Hahmo(testiLauta);
-        Point eskonSij = esko.sijainti();
-        
-        while(esko.oikealle()) {
-            testiLauta.paivita();
-            eskonSij = esko.sijainti();
-            assertTrue(esko.equals(testiLauta.getKartta()[eskonSij.x][eskonSij.y]));
-        }
-        
-    }
+    
 
     
     

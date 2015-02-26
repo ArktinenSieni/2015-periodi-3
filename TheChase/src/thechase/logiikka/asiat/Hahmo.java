@@ -66,8 +66,9 @@ public class Hahmo implements Asia {
     public void liiku() {
         if (algoritmi != null) {
             Suunta suunta = this.algoritmi.etene();
-            this.x += suunta.x;
-            this.y += suunta.y;
+            setSijainti(x + suunta.x, y + suunta.y);
+//            this.x += suunta.x;
+//            this.y += suunta.y;
         }
     }
 
@@ -80,7 +81,7 @@ public class Hahmo implements Asia {
      * @return onnistuiko asettaminen
      */
     public boolean setSijainti(int x, int y) {
-        if ((x < maxX && x > 0) && (y < maxY && y > 0) && (kartta[x][y] == null || kartta[x][y].ylitettava())) {
+        if (onkoVapaa(new Point(x, y))) {
             this.x = x;
             this.y = y;
             return true;
@@ -102,6 +103,17 @@ public class Hahmo implements Asia {
     public boolean getPahis() {
         return pahis;
     }
+    
+    public boolean onkoVapaa(Point koordinaatit) {
+        if (koordinaatit.x < kartta.length && koordinaatit.x > 0) {
+            if (koordinaatit.y < kartta[0].length && koordinaatit.y > 0) {
+                if (kartta[koordinaatit.x][koordinaatit.y] == null || kartta[koordinaatit.x][koordinaatit.y].ylitettava()) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * Onko yläruutu vapaa.
@@ -115,45 +127,20 @@ public class Hahmo implements Asia {
         return false;
     }
 
-    /**
-     * Liikuttaa Hahmoa ylös.
-     *
-     * @return onnustuiko siirtyminen.
-     */
-    public boolean ylos() {
-        if (ylosVapaa()) {
-            setSijainti(x, y - 1);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
+    
     /**
      * Onko alempi ruutu vapaa.
      *
      * @return onko vapaa.
      */
     public boolean alasVapaa() {
-        if (this.y < this.maxY && (kartta[x][y + 1] == null || kartta[x][y + 1].ylitettava())) {
+        if (this.y < this.maxY - 1 && (kartta[x][y + 1] == null || kartta[x][y + 1].ylitettava())) {
             return true;
         }
         return false;
     }
 
-    /**
-     * Liikuttaa Hahmoa alas.
-     *
-     * @return onnustuiko siirtyminen.
-     */
-    public boolean alas() {
-        if (alasVapaa()) {
-            setSijainti(x, y + 1);
-            return true;
-        } else {
-            return false;
-        }
-    }
+    
 
     /**
      * Onko vasemmanpuoleinen ruutu vapaa.
@@ -167,40 +154,14 @@ public class Hahmo implements Asia {
         return false;
     }
 
-    /**
-     * Liikuttaa Hahmoa vasemmalle.
-     *
-     * @return onnustuiko siirtyminen.
-     */
-    public boolean vasemmalle() {
-        if (vasemmalleVapaa()) {
-            setSijainti(x - 1, y);
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public boolean oikealleVapaa() {
-        if (this.x < this.maxX && (kartta[x + 1][y] == null || kartta[x + 1][y].ylitettava())) {
+        if (this.x < this.maxX - 1 && (kartta[x + 1][y] == null || kartta[x + 1][y].ylitettava())) {
             return true;
         }
         return false;
     }
 
-    /**
-     * Liikuttaa Hahmoa oikealle.
-     *
-     * @return onnustuiko siirtyminen.
-     */
-    public boolean oikealle() {
-        if (oikealleVapaa()) {
-            setSijainti(x + 1, y);
-            return true;
-        } else {
-            return false;
-        }
-    }
+    
 
     @Override
     public Point sijainti() {

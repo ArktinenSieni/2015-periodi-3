@@ -10,8 +10,9 @@ import thechase.logiikka.asiat.Palkinto;
 
 /**
  * Greedy-Best-Find algoritmi.
- * http://www.redblobgames.com/pathfinding/a-star/introduction.html Etsii
- * ensimmäisen lyhimmän etäisyyden omaavan mukaan.
+ * http://www.redblobgames.com/pathfinding/a-star/introduction.html 
+ * Kevennetty leveyssuuntainen haku, joka priorisoi tutkittavia solmuja niiden
+ * etäisyyden ja isäntäsolmun etäisyyden mukaan.
  *
  * @author mcraty
  */
@@ -27,14 +28,13 @@ public class GreedyBestFind implements Algoritmi {
         onkoKayty = new boolean[hahmo.kartanMitat().x + 1][hahmo.kartanMitat().y + 1];
 
     }
-
+    
     /**
      * Palauttaa parhaan suuntavaihtoehdon, jonne algoritmin käyttäjän olisi tarkoitus liikkua.
      * @return Edettävä suunta.
      */
     @Override
     public Suunta etene() {
-        Suunta suunta = Suunta.ISTU;
         onkoKayty = new boolean[hahmo.kartanMitat().x + 1][hahmo.kartanMitat().y + 1];
         PriorityQueue<Solmu> tutkittavat = new PriorityQueue<Solmu>();
         Solmu nykyinen = null;
@@ -50,7 +50,8 @@ public class GreedyBestFind implements Algoritmi {
             nykyinen = tutkittavat.poll();
             onkoKayty[nykyinen.sijainti().x][nykyinen.sijainti().y] = true;
 
-            if (nykyinen.sijainti().x == kohde.sijainti().x && nykyinen.sijainti().y == kohde.sijainti().y) {
+            if (nykyinen.sijainti().x == kohde.sijainti().x 
+		&& nykyinen.sijainti().y == kohde.sijainti().y) {
                 break;
             }
 

@@ -13,13 +13,19 @@ public class Solmu implements Comparable<Solmu> {
     private int x;
     private int y;
     private Solmu edellinen;
+    private Solmu seuraava;
     int prioriteetti;
+    int paino;
+    boolean kayty;
 
     public Solmu(int x, int y, int prioriteetti) {
         this.x = x;
         this.y = y;
         this.prioriteetti = prioriteetti;
         this.edellinen = null;
+        this.seuraava = null;
+        this.kayty = false;
+        this.paino = 0;
     }
 
     public Solmu(int x, int y, int prioriteetti, Solmu edel) {
@@ -27,6 +33,41 @@ public class Solmu implements Comparable<Solmu> {
         this.y = y;
         this.prioriteetti = prioriteetti;
         this.edellinen = edel;
+        this.seuraava = null;
+        this.kayty = false;
+        this.paino = 0;
+    }
+    
+    public int getPaino() {
+        return this.paino;
+    }
+    
+    public void setPaino(int paino) {
+        this.paino = paino;
+    }
+    
+    public void setKayty() {
+        this.kayty = true;
+    }
+    
+    public boolean getKayty() {
+        return this.kayty;
+    }
+    
+    public void setPrioriteetti(int prioriteetti) {
+        this.prioriteetti = prioriteetti;
+    }
+    
+    public int getPrioriteetti() {
+        return this.prioriteetti;
+    }
+    
+    public void setSeuraava(Solmu solmu) {
+        this.seuraava = solmu;
+    }
+    
+    public Solmu getSeuraava() {
+        return this.seuraava;
     }
 
     /**
@@ -38,7 +79,9 @@ public class Solmu implements Comparable<Solmu> {
         return new Point(x, y);
     }
 
-    
+    public void setEdellinen(Solmu solmu) {
+        this.edellinen = solmu;
+    }
 
     /**
      * Palauttaa edellisen solmun. Solmut muodostavat linkitetyn listan kohteesta Hahmoon.
@@ -56,6 +99,30 @@ public class Solmu implements Comparable<Solmu> {
         } else {
             return this.prioriteetti > s.prioriteetti ? 1 : -1;
         }
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Solmu other = (Solmu) obj;
+        if (this.x != other.x) {
+            return false;
+        }
+        if (this.y != other.y) {
+            return false;
+        }
+        return true;
     }
 
 }

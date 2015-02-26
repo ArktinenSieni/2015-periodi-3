@@ -11,6 +11,7 @@ import thechase.UI.GUI;
 import thechase.UI.TekstiUI;
 import thechase.logiikka.Lauta;
 import thechase.logiikka.Paivitettava;
+import thechase.logiikka.algoritmit.AStar;
 import thechase.logiikka.algoritmit.GreedyBestFind;
 import thechase.logiikka.algoritmit.Zombi;
 import thechase.logiikka.asiat.Hahmo;
@@ -36,7 +37,7 @@ public class Thechase {
     
     public Thechase() {
         lauta = new Lauta(99, 99);
-        lauta.getGeneroija().generoiEsteita(lauta.getKartta(), 5);
+        lauta.getGeneroija().generoiEsteita(lauta.getKartta(), 20);
         
         //objektit testejä varten. Myöhemmin koodaan niin ettei tarvitse kovakoodata
         sankari = new Hahmo(lauta);
@@ -44,8 +45,10 @@ public class Thechase {
         arpoja = new Random();
         palkinto = new Palkinto(arpoja.nextInt(lauta.getKartta().length - 2) + 1, arpoja.nextInt(lauta.getKartta()[0].length - 2) + 1, lauta);
         
+        
         hirvio.setSijainti(arpoja.nextInt(lauta.getKartta().length - 2) + 1, arpoja.nextInt(lauta.getKartta()[0].length - 2) + 1);
         sankari.setSijainti(arpoja.nextInt(lauta.getKartta().length - 2) + 1, arpoja.nextInt(lauta.getKartta()[0].length - 2) + 1);
+        
         lauta.paivita();
         
         // testimetodeita
@@ -63,8 +66,9 @@ public class Thechase {
      */
     public void kaynnista() {
         hirvio.setPahis();
-        sankari.setAlgo(new GreedyBestFind(sankari, palkinto));
-        hirvio.setAlgo(new Zombi(hirvio, sankari));
+        
+        sankari.setAlgo(new AStar(sankari, palkinto));
+        hirvio.setAlgo(new AStar(hirvio, sankari));
         GUITesti.run();
         peliLooppi();
         try {
@@ -112,7 +116,6 @@ public class Thechase {
             }
             hirvio.liiku();
             sankari.liiku();
-            hirvio.liiku();
             for (Paivitettava p : paivitettavat) {
 //                System.out.println("Paina enteriä edetäksesi");
 //                String komento = "kana";
