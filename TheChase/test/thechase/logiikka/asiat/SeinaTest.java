@@ -14,6 +14,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import thechase.logiikka.Lauta;
+import thechase.logiikka.Suunta;
 
 /**
  *
@@ -53,7 +54,7 @@ public class SeinaTest {
         testihahmo = new Hahmo(testilauta);
         testihahmo.setSijainti(9, 10);
         
-        testihahmo.oikealle();
+        testihahmo.setSijainti(testihahmo.sijainti().x + Suunta.OIKEA.x, testihahmo.sijainti().y + Suunta.OIKEA.y);
         
         assertTrue(testihahmo.sijainti().x == 9 && testihahmo.sijainti().y == 10);
     }

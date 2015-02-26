@@ -70,37 +70,7 @@ public class HahmoTest {
         assertFalse(esko.setSijainti(0, 0));
     }
 
-    /**
-     * Test of directions method, of class Hahmo.
-     */
-    @Test
-    public void testSuunnat() {
-        
-        
-        
-        while(esko.oikealle()) {
-            testiLauta.paivita();
-        }
-        
-        
-        while(esko.alas()) {
-            testiLauta.paivita();
-        }
-        
-        
-        while(esko.vasemmalle()) {
-            testiLauta.paivita();
-        }
-        
-        
-        while(esko.ylos()) {
-            testiLauta.paivita();
-        }
-        
-        Point eskonSij = esko.sijainti();
-        
-        assertTrue(eskonSij.x == 1 && eskonSij.y == 1);
-    }
+    
 
     
     
