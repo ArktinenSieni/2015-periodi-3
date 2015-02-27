@@ -36,7 +36,7 @@ public class Thechase {
     
     
     public Thechase() {
-        lauta = new Lauta(50, 50);
+        lauta = new Lauta(99, 99);
         lauta.getGeneroija().generoiEsteita(lauta.getKartta(), 20);
         
         //objektit testejä varten. Myöhemmin koodaan niin ettei tarvitse kovakoodata
@@ -107,7 +107,9 @@ public class Thechase {
      * Huolehtii pelin tapahtumien toteuttamisesta oikeassa järjestyksessä.
      */
     private void peliLooppi() {
-//        Scanner lukija = new Scanner(System.in);
+        Scanner lukija = new Scanner(System.in);
+        System.out.println("aloita painamalla enteriä");
+        String komento = lukija.nextLine();
         while(!gameOver()) {
             try {
                 Thread.sleep(50);
@@ -116,6 +118,10 @@ public class Thechase {
             }
             hirvio.liiku();
             sankari.liiku();
+            int liikkuukoKahdesti = arpoja.nextInt(100);
+            if ( liikkuukoKahdesti < 10) {
+                hirvio.liiku();
+            }
             
             for (Paivitettava p : paivitettavat) {
 //                System.out.println("Paina enteriä edetäksesi");
