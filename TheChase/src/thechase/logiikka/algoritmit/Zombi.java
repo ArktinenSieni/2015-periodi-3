@@ -8,7 +8,7 @@ import thechase.logiikka.asiat.Hahmo;
 
 /**
  * Algoritmi joka liikkuu sokeasti kohti kohdettaan, välittämättä esteistään.
- * @author TheArctic
+ * @author mcraty
  */
 public class Zombi implements Algoritmi {
     private Hahmo hahmo;

@@ -52,7 +52,7 @@ public class Piirtoalusta extends JPanel implements Paivitettava {
                         continue;
                     } else {
                         graphics.setColor(lauta.getKartta()[i][j].GetVari());
-                        graphics.fillRect(j, i, 1, 1);
+                        graphics.fillRect(j * 2, i * 2, 2, 2);
                     }
                 }
             }

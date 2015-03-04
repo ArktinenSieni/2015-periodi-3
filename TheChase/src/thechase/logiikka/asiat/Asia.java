@@ -15,8 +15,7 @@ import java.awt.Point;
  */
 public interface Asia {
     /**
-     * Palauttaa sijainnin. X:llä 0 on vasen- ja maksimi oikealaita.
-     * Y:llä 0 on ylä- ja maksimi on alalaita. 
+     * Palauttaa sijainnin. 
      * @return Palauttaa sijainnin. Paikalla 0 on x-, ja 1 y-parametri.
      * 
      */

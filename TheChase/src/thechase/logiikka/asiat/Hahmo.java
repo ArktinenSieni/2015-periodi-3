@@ -11,7 +11,7 @@ import thechase.logiikka.algoritmit.Algoritmi;
 /**
  * Tästä luokasta tehdään hirviö- ja sankari-oliot.
  *
- * @author TheArctic
+ * @author mcraty
  *
  */
 public class Hahmo implements Asia {
@@ -104,6 +104,11 @@ public class Hahmo implements Asia {
         return pahis;
     }
     
+    /**
+     * Tarkastaa annetun parametrien sijannin ruudun tilan.
+     * @param koordinaatit oltava muodossa x,y
+     * @return onko vapaa
+     */
     public boolean onkoVapaa(Point koordinaatit) {
         if (koordinaatit.x < kartta.length && koordinaatit.x > 0) {
             if (koordinaatit.y < kartta[0].length && koordinaatit.y > 0) {

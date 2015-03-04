@@ -7,8 +7,8 @@ import thechase.logiikka.asiat.Asia;
 import thechase.logiikka.asiat.Hahmo;
 
 /**
- *
- * @author matti
+ * A*-toteutus. http://www.redblobgames.com/pathfinding/a-star/introduction.html
+ * @author mcraty
  */
 public class AStar implements Algoritmi{
     private Hahmo hahmo;
@@ -40,6 +40,11 @@ public class AStar implements Algoritmi{
         return suunta(alku, viereinen);
     }
     
+    /**
+     * Etsii reitin hahmosta kohteeseen.
+     * @param alku Hahmon sijainti
+     * @return Solmu joka on kohteen sijainti.
+     */
     public Solmu ATahti(Solmu alku) {
         Solmu nykyinen = null;
         
@@ -74,14 +79,23 @@ public class AStar implements Algoritmi{
         
         return nykyinen;
     }
-
+    /**
+     * Luo solmuja. Jos solmu on jo olemassa, palautetaan olemassa oleva.
+     * @param sijainti Halutun solmun sijainti.
+     * @return Luotu tai haettu solmu.
+     */
     private Solmu uusiSolmu(Point sijainti) {
         if (kartta[sijainti.x][sijainti.y] == null) {
             kartta[sijainti.x][sijainti.y] = new Solmu(sijainti.x, sijainti.y, 0);
         }
         return kartta[sijainti.x][sijainti.y];
     }
-
+    
+    /**
+     * Hakee parametrisolmun ympärillä olevat vapaat solmut.
+     * @param nykyinen halutun solmun viereiset.
+     * @return lista viereisistä solmuista.
+     */
     private Solmu[] viereiset(Solmu nykyinen) {
         Solmu[] viereiset = new Solmu[4];
         
@@ -105,12 +119,24 @@ public class AStar implements Algoritmi{
         
         return viereiset;
     }
-
+    
+    /**
+     * Laskee heuristiikan. Tässä käytän Manhattan-etäisyyttä.
+     * @param seuraava Mistä lasketaan.
+     * @param kohde Mihin lasketaan.
+     * @return heuristiikan arvo.
+     */
     private int heuristiikka(Solmu seuraava, Asia kohde) {
         return Math.abs(seuraava.sijainti().x - kohde.sijainti().x) 
                 + Math.abs(seuraava.sijainti().y - kohde.sijainti().y);
     }
     
+    /**
+     * Alkeellinen painon asettaminen hirviön ympäristöön, jos se on asetettu. 
+     * @param seuraava Minkä solmun painoa tarkastellaan.
+     * @param pahis Mitä vältetään.
+     * @return Paino.
+     */
     private int laskePaino(Solmu seuraava, Asia pahis) {
         if (pahis != null) {
             int heuristiikka = heuristiikka(seuraava, pahis);
@@ -128,6 +154,13 @@ public class AStar implements Algoritmi{
         return 1;
     }
     
+    /**
+     * Kelaa löydetyn reitin viimeisestä solmusta alkusolmun viereiseen solmuun.
+     * 
+     * @param loppu Kohdesolmu.
+     * @param alku Hahmon solmu.
+     * @return Hahmon viereinen solmu.
+     */
     private Solmu etsiReitistaViereinen(Solmu loppu, Solmu alku) {
         Solmu vierus = loppu;
         
@@ -137,7 +170,13 @@ public class AStar implements Algoritmi{
         
         return vierus;
     }
-
+    
+    /**
+     * Antaa suunnan, missä viereinen solmu on.
+     * @param alku Hahmo.
+     * @param viereinen Hahmon vierussolmu.
+     * @return Mentävä sunta.
+     */
     private Suunta suunta(Solmu alku, Solmu viereinen) {
         int eroX = viereinen.sijainti().x - alku.sijainti().x;
         int eroY = viereinen.sijainti().y - alku.sijainti().y;

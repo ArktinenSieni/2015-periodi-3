@@ -33,8 +33,8 @@ public class GUI implements Runnable, Paivitettava {
             korkeus = lauta.getKartta().length * 10 + 20;
             leveys = lauta.getKartta()[0].length * 10;
         } else {
-            korkeus = lauta.getKartta().length + 2;
-            leveys = lauta.getKartta()[0].length; 
+            korkeus = lauta.getKartta().length * 2 + 4;
+            leveys = lauta.getKartta()[0].length * 2; 
         }
         Dimension koko = new Dimension(leveys, korkeus);
 
@@ -47,6 +47,10 @@ public class GUI implements Runnable, Paivitettava {
         frame.setResizable(false);
         frame.pack();
         frame.setVisible(true);
+    }
+    
+    public void closeWindow() {
+        frame.dispose();
     }
 
     private void luoKomponentit(Container container) {

@@ -8,7 +8,6 @@ package thechase.logiikka;
 import java.awt.Point;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 import thechase.logiikka.asiat.Asia;
 
 /**
